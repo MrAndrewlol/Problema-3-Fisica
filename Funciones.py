@@ -1,12 +1,12 @@
 import math
 
 #Resistance
-def resistance(resistivity,length,diameter): #Recibe como parametros la resistividad del material, el largo del cable (m) y su diametro (mm)
+def resistance(resistivity,length,diameter): #Params: resistivity (Ohms*m), length (m), diameter (mm)
     resistance = (4*resistivity*length)/(math.pi*((diameter*10**-3)**2))
     return resistance
 
 #AWG Converter
-def converter(AWG): #Recibe el número de AWG en String
+def converter(AWG): #Params: AWG number in String
     mm = 0
     if AWG == "0000":
         mm = 11.684
@@ -20,11 +20,11 @@ def converter(AWG): #Recibe el número de AWG en String
     return round(mm, 3) 
 
 #Current 
-def current(voltage, resistance): #Recibe el voltaje aplicado y  la resistencia
+def current(voltage, resistance): #Params: voltage (V), resistance (Ohms)
     return voltage/resistance
 
 #Power
-def power(voltage,current):
+def power(voltage,current): #Params: voltage (V), current (A)
     return voltage*current
 
 #drag speed
