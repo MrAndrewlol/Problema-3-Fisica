@@ -2,7 +2,7 @@ import math
 
 #Resistance
 def resistance(resistivity,length,diameter): #Recibe como parametros la resistividad del material, el largo del cable (m) y su diametro (mm)
-    resistance = (4*resistivity*length)/(math.pi*(diameter*10**-3))
+    resistance = (4*resistivity*length)/(math.pi*((diameter*10**-3)**2))
     return resistance
 
 #AWG Converter
@@ -26,3 +26,11 @@ def current(voltage, resistance): #Recibe el voltaje aplicado y  la resistencia
 #Power
 def power(voltage,current):
     return voltage*current
+
+#drag speed
+def dSpeed(current,particleDensity,diameter): #Params: current (A), particle density (electrons/m^3), diameter (mm)
+    return (4*current)/(particleDensity*(1.60*10**-19)*((diameter*10**-3)**2))
+
+#time
+def time(length,dSpeed): #Params: length (m), drag speed (m/s)
+    return length/dSpeed
