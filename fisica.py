@@ -16,11 +16,11 @@ def calculardatos(largo, largoprefijo,diametro, voltaje, material):
             integer_number = int(diametro)
             largo = float(largo)*dicprefix[largoprefijo]
             print(f"The integer value is: {integer_number}")
-            resistencia = func.resistance(float(dicmater[material]), float(largo), float(dicawg[diametro]))
+            resistencia = func.resistance(float(dicmateresis[material]), float(largo), float(dicawg[diametro]))
             resis.configure(text= " "+ str(resistencia) +" Ω")
             corriente = func.current(float(voltaje), float(resistencia))
             corr.configure(text=" " + str(corriente) + " A")
-            rapidez = func.dSpeed(float(corriente),1,float(diametro) )
+            rapidez = func.dSpeed(float(corriente),dicmater[material],float(diametro) )
             rapi.configure(text= " " + str(rapidez) + " m/s" )
             tiempo = func.time(float(largo),float(rapidez))
             tiemp.configure(text=" "+ str(tiempo) + " s")
@@ -28,16 +28,18 @@ def calculardatos(largo, largoprefijo,diametro, voltaje, material):
             pr.movelectron(tortu3, tortu4, tortu5, tortu6, float(diametro)/2, largo, tiempo%4, rapidez%11)
         except ValueError:
             print("The string does not represent a valid integer.")
-            resistencia = func.resistance(float(dicmateresis[material]), float(largo), float(dicawg[diametro]))
+            diametrus = dicawg[diametro]
+            largo = float(largo)*dicprefix[largoprefijo]
+            resistencia = func.resistance(float(dicmateresis[material]), float(largo), float(diametrus))
             resis.configure(text= " "+ str(resistencia) +" Ω")
             corriente = func.current(float(voltaje), float(resistencia))
             corr.configure(text=" " + str(corriente) + " A")
-            rapidez = func.dspeed(float(corriente),1,float(diametro) )
+            rapidez = func.dSpeed(float(corriente),dicmater[material],float(diametrus) )
             rapi.configure(text= " " + str(rapidez) + " m/s" )
             tiempo = func.time(float(largo),float(rapidez))
             tiemp.configure(text=" "+ str(tiempo) + " s")
-            pr.cilindro(tortu2, largo, float(diametro))
-            pr.movelectron(tortu3, tortu4, tortu5, tortu6, float(diametro)/2, largo, tiempo%4, rapidez%11)
+            pr.cilindro(tortu2, largo, float(diametrus))
+            pr.movelectron(tortu3, tortu4, tortu5, tortu6, float(diametrus)/2, largo, tiempo%4, rapidez%11)
 
         
             
@@ -53,7 +55,8 @@ dicprefix = { "M": 1*10**6, "k": 1*10**3, "h": 1*10**2, "da": 1*10**1, "--": 1 ,
 awg = ["AWG 4", "AWG 6","AWG 8","AWG 10", "AWG 12","AWG 14", "AWG 16", "AWG 18", "AWG 20", "AWG 22"]
 dicawg = {"AWG 4": 5.189, "AWG 6": 4.115,"AWG 8": 3.264,"AWG 10" : 2.588, "AWG 12" : 2.053,"AWG 14": 1.628, "AWG 16": 1.291, "AWG 18" : 1.024, "AWG 20" : 0.812, "AWG 22" : 0.643}
 mater = ["oro", "plata", "cobre", "aluminio", "grafito"]
-dicmater = {"oro":1, "plata" : 1, "cobre" :1, "aluminio": 1, "grafito": 1}
+dicmater = {"oro":1.64*10**28, "plata" : 5.8*10**28, "cobre" :8.5*10**28, "aluminio": 1.87*10**28, "grafito": 6.2*10**28}
+
 dicmateresis = {"oro":2.35*10**-8, "plata" : 1.59*10**-8, "cobre" :1.79*10**-8, "aluminio": 2.82*10**-8, "grafito": 60.00*10**-8} #Resistividad ohms por metro
 
 
