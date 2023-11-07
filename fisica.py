@@ -24,6 +24,8 @@ def calculardatos(largo, largoprefijo,diametro, voltaje, material):
             rapi.configure(text= " " + str(rapidez) + " m/s" )
             tiempo = func.time(float(largo),float(rapidez))
             tiemp.configure(text=" "+ str(tiempo) + " s")
+            potencia = func.power(float(voltaje), corriente)
+            pot.configure(text= " " + str(potencia) + " W")
             pr.cilindro(tortu2, largo, float(diametro))
             pr.movelectron(tortu3, tortu4, tortu5, tortu6, float(diametro)/2, largo, tiempo%4, rapidez%11)
         except ValueError:
@@ -36,8 +38,8 @@ def calculardatos(largo, largoprefijo,diametro, voltaje, material):
             corr.configure(text=" " + str(corriente) + " A")
             rapidez = func.dSpeed(float(corriente),dicmater[material],float(diametrus) )
             rapi.configure(text= " " + str(rapidez) + " m/s" )
-            tiempo = func.time(float(largo),float(rapidez))
-            tiemp.configure(text=" "+ str(tiempo) + " s")
+            tiempo = func.time(float(largo),float(rapidez)/60)
+            tiemp.configure(text=" "+ str(tiempo) + " min")
             pr.cilindro(tortu2, largo, float(diametrus))
             pr.movelectron(tortu3, tortu4, tortu5, tortu6, float(diametrus)/2, largo, tiempo%4, rapidez%11)
 
@@ -111,13 +113,6 @@ tortu6 = RawTurtle(screen).color("yellow")
 
 
 
-
-tituloentrys = CTK.CTkLabel( entryframe,text="Entradas", font=("Arial", 18))
-tituloentrys.grid(row=0,column=0, columnspan= 25)
-
-titulosalida = CTK.CTkLabel( frame,text="Salidas", font=("Arial", 18))
-titulosalida.grid(row=0,column=25, columnspan= 25)
-
 columndesp = 10
 ##Entradas de largo de alambre
 largoal = CTK.CTkLabel( entryframe,text="        Largo del alambre (metros)", font=("Arial", 14))
@@ -158,25 +153,31 @@ buton.grid(row= 8, column=columndesp+1, sticky="n")
 ##Parametros de Salida 
 
 ##Resistencia del alambre
-CTK.CTkLabel( frame,text="Resistencia del alambre", font=("Arial", 16)).grid(row=1, column=25, columnspan= 25)
-resis = CTK.CTkLabel( frame,text="0 Ω", font=("Arial", 16))
+CTK.CTkLabel( frame,text="Resistencia del alambre", font=("Arial", 14)).grid(row=1, column=25, columnspan= 25)
+resis = CTK.CTkLabel( frame,text="0 Ω", font=("Arial", 14))
 resis.grid(row=2,column=25, columnspan= 25)
 
 #Corriente
-CTK.CTkLabel( frame,text="Corriente", font=("Arial", 16)).grid(row=3, column=25, columnspan= 25)
-corr = CTK.CTkLabel( frame,text="0.0 A", font=("Arial", 16))
+CTK.CTkLabel( frame,text="Corriente", font=("Arial", 14)).grid(row=3, column=25, columnspan= 25)
+corr = CTK.CTkLabel( frame,text="0.0 A", font=("Arial", 14))
 corr.grid(row=4,column=25, columnspan= 25)
 
 
 #velocidad
-CTK.CTkLabel( frame,text="Rapidez de arrastre de los electrones", font=("Arial", 16)).grid(row=5, column=25, columnspan= 25)
-rapi = CTK.CTkLabel( frame,text=" 0 m/s", font=("Arial", 16))
+CTK.CTkLabel( frame,text="Rapidez de arrastre de los electrones", font=("Arial", 14)).grid(row=5, column=25, columnspan= 25)
+rapi = CTK.CTkLabel( frame,text=" 0 m/s", font=("Arial", 14))
 rapi.grid(row=6,column=25, columnspan= 25)
 
 #tiempo
 CTK.CTkLabel( frame,text="     Tiempo que le tomará a los electrones atravesar todo el alambre         ", font=("Arial", 16)).grid(row=7, column=25, columnspan= 25)
-tiemp = CTK.CTkLabel( frame,text=" 0 s", font=("Arial", 16))
+tiemp = CTK.CTkLabel( frame,text=" 0 s", font=("Arial", 14))
 tiemp.grid(row=8,column=25, columnspan= 25)
+
+#potencia
+CTK.CTkLabel( frame,text="Potencia disipada por el alambre", font=("Arial", 14)).grid(row=9, column=25, columnspan= 25)
+pot = CTK.CTkLabel( frame,text=" 0 W", font=("Arial", 14))
+pot.grid(row=10,column=25, columnspan= 25)
+
 
 ##APARTADO
 
