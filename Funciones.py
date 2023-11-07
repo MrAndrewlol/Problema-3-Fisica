@@ -3,7 +3,7 @@ import math
 #Resistance
 def resistance(resistivity,length,diameter): #Params: resistivity (Ohms*m), length (m), diameter (mm)
     resistance = (4*resistivity*length)/(math.pi*((diameter*10**-3)**2))
-    return resistance
+    return round(resistance,2)
 
 #AWG Converter
 def converter(AWG): #Params: AWG number in String

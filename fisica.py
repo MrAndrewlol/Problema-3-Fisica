@@ -28,7 +28,7 @@ def calculardatos(largo, largoprefijo,diametro, voltaje, material):
             pr.movelectron(tortu3, tortu4, tortu5, tortu6, float(diametro)/2, largo, tiempo%4, rapidez%11)
         except ValueError:
             print("The string does not represent a valid integer.")
-            resistencia = func.resistance(float(dicmater[material]), float(largo), float(dicawg[diametro]))
+            resistencia = func.resistance(float(dicmateresis[material]), float(largo), float(dicawg[diametro]))
             resis.configure(text= " "+ str(resistencia) +" Ω")
             corriente = func.current(float(voltaje), float(resistencia))
             corr.configure(text=" " + str(corriente) + " A")
