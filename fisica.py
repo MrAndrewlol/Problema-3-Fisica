@@ -26,6 +26,7 @@ def calculardatos(largo, largoprefijo,diametro, voltaje, material):
             tiemp.configure(text=" "+ str(tiempo) + " s")
             potencia = func.power(float(voltaje), corriente)
             pot.configure(text= " " + str(potencia) + " W")
+            #pr.drawBattery(tortu2)
             pr.cilindro(tortu2, largo, float(diametro))
             pr.movelectron(tortu3, tortu4, tortu5, tortu6, float(diametro)/2, largo, tiempo%4, rapidez%11)
         except ValueError:
@@ -40,6 +41,7 @@ def calculardatos(largo, largoprefijo,diametro, voltaje, material):
             rapi.configure(text= " " + str(rapidez) + " m/s" )
             tiempo = func.time(float(largo),float(rapidez)/60)
             tiemp.configure(text=" "+ str(tiempo) + " min")
+            #pr.drawBattery(tortu2)
             pr.cilindro(tortu2, largo, float(diametrus))
             pr.movelectron(tortu3, tortu4, tortu5, tortu6, float(diametrus)/2, largo, tiempo%4, rapidez%11)
 
@@ -53,7 +55,7 @@ def calculardatos(largo, largoprefijo,diametro, voltaje, material):
 
 ###Array
 prefix = ["M", "k", "h", "da", "d", "--","c", "m","μ", "n", "p" ]
-dicprefix = { "M": 1*10**6, "k": 1*10**3, "h": 1*10**2, "da": 1*10**1, "--": 1 , "d": 1*10**-1, "c": 1*10**-2, "m": 1*10**-3, "μ": 1*10*-6, "n": 1*10*-9, "p": 1*10*-12 }
+dicprefix = { "M": 1*10**6, "k": 1*10**3, "h": 1*10**2, "da": 1*10**1, "--": 1 , "d": 1*10**-1, "c": 1*10**-2, "m": 1*10**-3, "μ": 1*10**-6, "n": 1*10**-9, "p": 1*10**-12 }
 awg = ["AWG 4", "AWG 6","AWG 8","AWG 10", "AWG 12","AWG 14", "AWG 16", "AWG 18", "AWG 20", "AWG 22"]
 dicawg = {"AWG 4": 5.189, "AWG 6": 4.115,"AWG 8": 3.264,"AWG 10" : 2.588, "AWG 12" : 2.053,"AWG 14": 1.628, "AWG 16": 1.291, "AWG 18" : 1.024, "AWG 20" : 0.812, "AWG 22" : 0.643}
 mater = ["oro", "plata", "cobre", "aluminio", "grafito"]
