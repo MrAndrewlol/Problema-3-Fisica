@@ -46,8 +46,7 @@ def calculardatos(largo, largoprefijo,diametro, voltaje, material):
             tiemp.configure(text=" "+ str(tiempo) + " s")
             potencia = func.power(float(voltaje), corriente)
             pot.configure(text= " " + str(potencia) + " W")
-            #pr.drawBattery(tortu2)
-            pr.cilindro(tortu2, largo, float(diametro))
+            pr.drawLentgh(tortu2,str(largo),str(largoprefijo))
             pr.movelectron(tortu3, tortu4, tortu5, tortu6, float(diametro)/2, largo, tiempo%4, rapidez%11)
         else:
             print("The string does not represent a valid integer.")
@@ -61,13 +60,9 @@ def calculardatos(largo, largoprefijo,diametro, voltaje, material):
             rapi.configure(text= " " + str(rapidez) + " m/s" )
             tiempo = func.time(float(largo),float(rapidez)/60)
             tiemp.configure(text=" "+ str(tiempo) + " min")
-<<<<<<< Updated upstream
-            #pr.drawBattery(tortu2)
-=======
+            pr.drawLentgh(tortu2,str(largo),str(largoprefijo))
             potencia = func.power(float(voltaje), corriente)
             pot.configure(text= " " + str(potencia) + " W")
->>>>>>> Stashed changes
-            pr.cilindro(tortu2, largo, float(diametrus))
             pr.movelectron(tortu3, tortu4, tortu5, tortu6, float(diametrus)/2, largo, tiempo%4, rapidez%11)
 
         
@@ -136,7 +131,10 @@ tortu3 = RawTurtle(screen).color("yellow")
 tortu4 = RawTurtle(screen).color("yellow")
 tortu5 = RawTurtle(screen).color("yellow")
 tortu6 = RawTurtle(screen).color("yellow")
-
+pr.cilindro(tortu2)
+pr.drawBattery(tortu2)
+pr.drawCable(tortu2)
+tortu2.hideturtle()
 
 
 
