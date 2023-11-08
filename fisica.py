@@ -12,11 +12,31 @@ CTK.set_default_color_theme("blue")  # Themes: blue (default), dark-blue, green
 def calculardatos(largo, largoprefijo,diametro, voltaje, material):
     if(int(largo) != 0 and diametro !=0 and int(voltaje) !=0):
         print("exitos")
-        try:
-            integer_number = int(diametro)
+#dicawg = {"AWG 4": 5.189, "AWG 6": 4.115,"AWG 8": 3.264,"AWG 10" : 2.588, "AWG 12" : 2.053,"AWG 14": 1.628, "AWG 16": 1.291, "AWG 18" : 1.024, "AWG 20" : 0.812, "AWG 22" : 0.643}
+    
+
+        array = diametro.split(" ")
+        if(array[0] != "AWG"):
+            if(float(diametro)>5.189):
+                diametro = 5.189
+            elif(float(diametro)<5.189 and float(diametro)>4.115):
+                diametro = 4.115
+            elif(float(diametro)<4.115 and float(diametro)>3.264):
+                diametro = 3.264
+            elif(float(diametro)<3.264 and float(diametro)>2.588):
+                diametro = 2.588
+            elif(float(diametro)<2.588 and float(diametro)>2.053):
+                diametro = 2.053
+            elif(float(diametro)<2.053 and float(diametro)>1.628):
+                diametro = 1.628
+            elif(float(diametro)<1.628 and float(diametro)>1.291):
+                diametro = 1.291
+            elif(float(diametro)<1.291 and float(diametro)>0.812):
+                diametro = 0.812
+            elif(float(diametro)<0.812):
+                diametro = 0.643
             largo = float(largo)*dicprefix[largoprefijo]
-            print(f"The integer value is: {integer_number}")
-            resistencia = func.resistance(float(dicmateresis[material]), float(largo), float(dicawg[diametro]))
+            resistencia = func.resistance(float(dicmateresis[material]), float(largo), float(diametro))
             resis.configure(text= " "+ str(resistencia) +" Ω")
             corriente = func.current(float(voltaje), float(resistencia))
             corr.configure(text=" " + str(corriente) + " A")
@@ -29,7 +49,7 @@ def calculardatos(largo, largoprefijo,diametro, voltaje, material):
             #pr.drawBattery(tortu2)
             pr.cilindro(tortu2, largo, float(diametro))
             pr.movelectron(tortu3, tortu4, tortu5, tortu6, float(diametro)/2, largo, tiempo%4, rapidez%11)
-        except ValueError:
+        else:
             print("The string does not represent a valid integer.")
             diametrus = dicawg[diametro]
             largo = float(largo)*dicprefix[largoprefijo]
@@ -41,7 +61,12 @@ def calculardatos(largo, largoprefijo,diametro, voltaje, material):
             rapi.configure(text= " " + str(rapidez) + " m/s" )
             tiempo = func.time(float(largo),float(rapidez)/60)
             tiemp.configure(text=" "+ str(tiempo) + " min")
+<<<<<<< Updated upstream
             #pr.drawBattery(tortu2)
+=======
+            potencia = func.power(float(voltaje), corriente)
+            pot.configure(text= " " + str(potencia) + " W")
+>>>>>>> Stashed changes
             pr.cilindro(tortu2, largo, float(diametrus))
             pr.movelectron(tortu3, tortu4, tortu5, tortu6, float(diametrus)/2, largo, tiempo%4, rapidez%11)
 
