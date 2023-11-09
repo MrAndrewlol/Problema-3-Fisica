@@ -9,8 +9,8 @@ CTK.set_appearance_mode("System")  # Modes: system (default), light, dark
 CTK.set_default_color_theme("blue")  # Themes: blue (default), dark-blue, green
 
 
-def calculardatos(largo, largoprefijo,diametro, voltaje, material):
-    if(int(largo) != 0 and diametro !=0 and int(voltaje) !=0):
+def calculardatos(largo, largoprefijo,diametro, voltaje, material, screen):
+    if(int(largo) != 0  and int(voltaje) !=0):
         print("exitos")
 #dicawg = {"AWG 4": 5.189, "AWG 6": 4.115,"AWG 8": 3.264,"AWG 10" : 2.588, "AWG 12" : 2.053,"AWG 14": 1.628, "AWG 16": 1.291, "AWG 18" : 1.024, "AWG 20" : 0.812, "AWG 22" : 0.643}
     
@@ -45,15 +45,13 @@ def calculardatos(largo, largoprefijo,diametro, voltaje, material):
             tiempo = func.time(float(largo),float(rapidez))
             tiemp.configure(text=" "+ str(round(tiempo),2) + " s")
             potencia = func.power(float(voltaje), corriente)
-<<<<<<< Updated upstream
-            pot.configure(text= " " + str(potencia) + " W")
-            pr.drawLentgh(tortu2,str(largo),str(largoprefijo))
-=======
             pot.configure(text= " " + str(round(potencia,2)) + " W")
             #pr.drawBattery(tortu2)
-            pr.cilindro(tortu2, largo, float(diametro))
->>>>>>> Stashed changes
-            pr.movelectron(tortu3, tortu4, tortu5, tortu6, float(diametro)/2, largo, tiempo%4, rapidez%11)
+            butons.grid(row= 8, column=columndesp+2)
+            butons.configure( text="Movimiento aleatorio",command=lambda: pr.moveelectronrand(screen, 525, 25, 500, speed ))
+            pr.straight(screen, 525, 25, 500, speed)
+
+            
         elif(array[0] == "AWG"):
             print("The string does not represent a valid integer.")
             diametrus = func.converter(array[1])
@@ -63,28 +61,17 @@ def calculardatos(largo, largoprefijo,diametro, voltaje, material):
             corriente = func.current(float(voltaje), float(resistencia))
             corr.configure(text=" " + str(round(corriente,2)) + " A")
             rapidez = func.dSpeed(float(corriente),dicmater[material],float(diametrus) )
-<<<<<<< Updated upstream
-            rapi.configure(text= " " + str(rapidez) + " m/s" )
-            tiempo = func.time(float(largo),float(rapidez)/60)
-            tiemp.configure(text=" "+ str(tiempo) + " min")
-            pr.drawLentgh(tortu2,str(largo),str(largoprefijo))
-            potencia = func.power(float(voltaje), corriente)
-            pot.configure(text= " " + str(potencia) + " W")
-=======
             rapi.configure(text= " " + str(round(rapidez,2)) + " m/s" )
             tiempo = func.time(float(largo),float(rapidez))
             tiemp.configure(text=" "+ str(round(float(tiempo),2)/60) + " min")
             potencia = func.power(float(voltaje), corriente)
             pot.configure(text= " " + str(round(potencia,2)) + " W")
             #pr.drawBattery(tortu2)
-            pr.cilindro(tortu2, largo, float(diametrus))
->>>>>>> Stashed changes
-            pr.movelectron(tortu3, tortu4, tortu5, tortu6, float(diametrus)/2, largo, tiempo%4, rapidez%11)
-
-        
+            butons.grid(row= 8, column=columndesp+2)
+            butons.configure( text="Movimiento aleatorio",command=lambda: pr.moveelectronrand(screen, 525, 25, 500, speed ))            
+            pr.straight(screen, 525, 25, 500, speed)
             
-
-        
+            
     
 
 
@@ -120,7 +107,7 @@ frame.grid(row=4,column=25, columnspan= 25, rowspan=25, sticky= "n")
 entryframe = CTK.CTkFrame(app)
 entryframe.rowconfigure(25, weight=2)
 entryframe.columnconfigure(25, weight=2)
-entryframe.grid(row=4,column=0, columnspan= 25, rowspan=25, sticky= "n")
+entryframe.grid(row=5,column=0, columnspan= 25, rowspan=25, sticky= "n")
 
 
 
@@ -140,13 +127,12 @@ canvas.config(width=1920, height=500) ##Cambiar la resolucion de la pantalla de 
 canvas.grid(row=3,column=0, columnspan=100)
 
 screen = turtle.TurtleScreen(canvas)
-tortugagrid = RawTurtle(screen) 
+tortugagrid = RawTurtle(screen)
+tortugagrid.hideturtle()
+speed = 1
 
 tortu2 = RawTurtle(screen)
-tortu3 = RawTurtle(screen).color("yellow")
-tortu4 = RawTurtle(screen).color("yellow")
-tortu5 = RawTurtle(screen).color("yellow")
-tortu6 = RawTurtle(screen).color("yellow")
+
 pr.cilindro(tortu2)
 pr.drawBattery(tortu2)
 pr.drawCable(tortu2)
@@ -188,8 +174,10 @@ voltd.grid(row=2, column = columndesp+3)
 CTK.CTkLabel( entryframe,text="\n             \n", font=("Arial", 14)).grid(row=3, column=columndesp+2) #Espaciado
 CTK.CTkLabel( entryframe,text="        ", font=("Arial", 14)).grid(row=7, column=columndesp+5) #Espaciado
 #BUTON
-buton = CTK.CTkButton(entryframe, text="Calcular y dibujar", command=lambda: calculardatos(entrylargo.get(), optionmenu_var.get(), awgentry.get(),voltd.get() ,maters.get()  ))
-buton.grid(row= 8, column=columndesp+1, sticky="n")
+buton = CTK.CTkButton(entryframe, text="Calcular y dibujar", command=lambda: calculardatos(entrylargo.get(), optionmenu_var.get(), awgentry.get(),voltd.get() ,maters.get(), screen  ))
+buton.grid(row= 8, column=columndesp+1)
+butons = CTK.CTkButton(entryframe, text="")
+
 
 ##Parametros de Salida 
 
@@ -221,6 +209,7 @@ pot.grid(row=10,column=25, columnspan= 25)
 
 
 ##APARTADO
+
 
 
 

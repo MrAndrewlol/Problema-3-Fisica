@@ -2,6 +2,7 @@ import turtle
 import tkinter as tk
 from turtle import RawTurtle, ScrolledCanvas
 import customtkinter as Ctk
+import random as rnd
 
 def mainpos(tortuga,screensize):
     tortuga.penup()
@@ -9,7 +10,7 @@ def mainpos(tortuga,screensize):
     tortuga.pendown()
 
 def cilindro(tortuga, largo = 1000, diameter = 50):
-    tortuga._tracer(0)
+    tortuga._tracer(False)
     radius = diameter/2
     tortuga.forward(largo/2)
     tortuga.circle(radius)
@@ -21,6 +22,7 @@ def cilindro(tortuga, largo = 1000, diameter = 50):
     tortuga.forward(largo)
     tortuga.circle(radius, extent=180) #  Draw 1/2 of the bottom/circle
     tortuga.forward(largo/2)
+    tortuga._tracer(True)
 
     
 
@@ -62,7 +64,7 @@ def movelectron(tortuga, tortuga1, tortuga2,tortuga3, radio, largo, rapidez, tie
         
 #Draw battery
 def drawBattery(tortuga):
-    tortuga._tracer(0)
+    tortuga._tracer(False)
     tortuga.penup()
     tortuga.goto(-3,-150)
     tortuga.pendown()
@@ -86,6 +88,8 @@ def drawBattery(tortuga):
     tortuga.goto(0,0)
     tortuga.pendown()
     tortuga.setheading(0)
+    tortuga._tracer(True)
+    
 
 def drawCable(tortuga):
     tortuga._tracer(0)
@@ -136,6 +140,58 @@ def drawLentgh(tortuga, length, prefijo):
     tortuga.write("largo = " + length + " " + prefijo + "m", font = ("Arial",16,"normal"))
 
     
+def moveelectronrand(screen, coordx, coordy, coordfinal, speed):
+    
+    tortuga = RawTurtle(screen)
+    tortuga.speed(0)
+    tortuga.color("yellow")
+    tortuga.shape("circle")
+    tortuga.pencolor("black")
+    tortuga.shapesize(stretch_wid=0.5)
+    coordy = abs(int(coordy))
+    partidaini = int(-coordx)
+    tortuga.penup()
+    tortuga.hideturtle()
+    contadores = 0
+    while(contadores < 4):
+        tortuga.hideturtle()
+        tortuga.speed(0)
+        tortuga.goto(-coordx+40, rnd.randint(0,coordy+25))
+        tortuga.showturtle()
+        tortuga.speed(speed)
+        partidaini = partidaini+rnd.randint(0,40)
+        tortuga.goto(partidaini, rnd.randint(0,coordy+25))
+        while(partidaini < coordfinal): ##Largo si va de izquierda a derecha
+            partidaini = partidaini + rnd.randint(1,40)
+            if(partidaini > -coordx-40):
+                partidaini = partidaini + rnd.randint(-40,40)
+            tortuga.goto(partidaini, rnd.randint(0,coordy+25))
+        contadores = contadores +1
+        partidaini = int(-coordx)
+
+
+def straight(screen, coordx, coordy, coordfinal, speed):
+    
+    tortuga = RawTurtle(screen)
+    tortuga.speed(speed)
+    tortuga.color("yellow")
+    tortuga.shape("circle")
+    tortuga.pencolor("black")
+    tortuga.shapesize(stretch_wid=0.5)
+
+    coordy = abs(int(coordy))
+    partidaini = int(-coordx)
+    contador = 0
+    while(contador < 4):
+        tortuga.penup()
+        tortuga.hideturtle()
+        tortuga.goto(partidaini+20,25 )
+        tortuga.speed(speed)
+        tortuga.showturtle()
+        tortuga.goto(coordfinal-20, 25)
+        contador = contador + 1
+        tortuga.speed(0)
+
 
 # app = tk.Tk()  # create CTk window like you do with the Tk window
 # app.geometry("1530x1080+0+0") #1920 -1080
