@@ -5,6 +5,7 @@ import tkinter as tk
 import Funciones as func
 import pruebas as pr
 import threading
+import random as rnd
 
 CTK.set_appearance_mode("System")  # Modes: system (default), light, dark
 CTK.set_default_color_theme("blue")  # Themes: blue (default), dark-blue, green
@@ -49,9 +50,11 @@ def calculardatos(largo, largoprefijo,diametro, voltaje, material, screen):
             pot.configure(text= " " + str(round(potencia,2)) + " W")
             #pr.drawBattery(tortu2)
             butons.grid(row= 8, column=columndesp+2)
+            random = rnd.randint(0,25)
             butons.configure( text="Movimiento aleatorio",command=lambda: pr.moveelectronrand(screen, 525, 25, 500, speed ))
-            hilo1 = threading.Thread(target=pr.straight, args=(screen, 525, 25, 500, speed))
-            hilo2 = threading.Thread(target=pr.straight, args=(screen, 525, 50, 500, speed))
+            hilo1 = threading.Thread(target=pr.straight, args=(screen, 525, 25, 500, speed,random ))
+            random = rnd.randint(0,25)
+            hilo2 = threading.Thread(target=pr.straight, args=(screen, 525, 50, 500, speed, random))
             hilo1.start()
             hilo2.start()
 
@@ -72,9 +75,11 @@ def calculardatos(largo, largoprefijo,diametro, voltaje, material, screen):
             pot.configure(text= " " + str(round(potencia,2)) + " W")
             #pr.drawBattery(tortu2)
             butons.grid(row= 8, column=columndesp+2)
-            butons.configure( text="Movimiento aleatorio",command=lambda: pr.moveelectronrand(screen, 525, 25, 500, speed ))            
-            hilo1 = threading.Thread(target=pr.straight, args=(screen, 525, 25, 500, speed))
-            hilo2 = threading.Thread(target=pr.straight, args=(screen, 525, 50, 500, speed))
+            butons.configure( text="Movimiento aleatorio",command=lambda: pr.moveelectronrand(screen, 525, 25, 500, speed ))  
+            random = rnd.randint(0,25)          
+            hilo1 = threading.Thread(target=pr.straight, args=(screen, 525, 25, 500, speed, random))
+            random = rnd.randint(0,25)
+            hilo2 = threading.Thread(target=pr.straight, args=(screen, 525, 50, 500, speed, random))
             hilo1.start()
             hilo2.start()
             

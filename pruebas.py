@@ -170,7 +170,7 @@ def moveelectronrand(screen, coordx, coordy, coordfinal, speed):
         partidaini = int(-coordx)
 
 
-def straight(screen, coordx, coordy, coordfinal, speed):
+def straight(screen, coordx, coordy, coordfinal, speed, random):
     
     tortuga = RawTurtle(screen)
     tortuga.speed(speed)
@@ -185,10 +185,10 @@ def straight(screen, coordx, coordy, coordfinal, speed):
     while(contador < 4):
         tortuga.penup()
         tortuga.hideturtle()
-        tortuga.goto(partidaini+20,25 )
+        tortuga.goto(partidaini+20,random )
         tortuga.speed(speed)
         tortuga.showturtle()
-        tortuga.goto(coordfinal-20, 25)
+        tortuga.goto(coordfinal-20, random)
         contador = contador + 1
         tortuga.speed(0)
 
