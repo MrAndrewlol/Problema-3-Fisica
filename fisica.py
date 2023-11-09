@@ -36,33 +36,49 @@ def calculardatos(largo, largoprefijo,diametro, voltaje, material):
             elif(float(diametro)<0.812):
                 diametro = 0.643
             largo = float(largo)*dicprefix[largoprefijo]
-            resistencia = func.resistance(float(dicmateresis[material]), float(largo), float(diametro))
-            resis.configure(text= " "+ str(resistencia) +" Ω")
+            resistencia = func.resistance(float(dicmateresis[material]), float(largo), float(diametrus))
+            resis.configure(text= " "+ str(round(resistencia,2)) +" Ω")
             corriente = func.current(float(voltaje), float(resistencia))
-            corr.configure(text=" " + str(corriente) + " A")
-            rapidez = func.dSpeed(float(corriente),dicmater[material],float(diametro) )
-            rapi.configure(text= " " + str(rapidez) + " m/s" )
+            corr.configure(text=" " + str(round(corriente,2)) + " A")
+            rapidez = func.dSpeed(float(corriente),dicmater[material],float(diametrus) )
+            rapi.configure(text= " " + str(round(rapidez,2)) + " m/s" )
             tiempo = func.time(float(largo),float(rapidez))
-            tiemp.configure(text=" "+ str(tiempo) + " s")
+            tiemp.configure(text=" "+ str(round(tiempo),2) + " s")
             potencia = func.power(float(voltaje), corriente)
+<<<<<<< Updated upstream
             pot.configure(text= " " + str(potencia) + " W")
             pr.drawLentgh(tortu2,str(largo),str(largoprefijo))
+=======
+            pot.configure(text= " " + str(round(potencia,2)) + " W")
+            #pr.drawBattery(tortu2)
+            pr.cilindro(tortu2, largo, float(diametro))
+>>>>>>> Stashed changes
             pr.movelectron(tortu3, tortu4, tortu5, tortu6, float(diametro)/2, largo, tiempo%4, rapidez%11)
-        else:
+        elif(array[0] == "AWG"):
             print("The string does not represent a valid integer.")
-            diametrus = dicawg[diametro]
+            diametrus = func.converter(array[1])
             largo = float(largo)*dicprefix[largoprefijo]
             resistencia = func.resistance(float(dicmateresis[material]), float(largo), float(diametrus))
-            resis.configure(text= " "+ str(resistencia) +" Ω")
+            resis.configure(text= " "+ str(round(resistencia,2)) +" Ω")
             corriente = func.current(float(voltaje), float(resistencia))
-            corr.configure(text=" " + str(corriente) + " A")
+            corr.configure(text=" " + str(round(corriente,2)) + " A")
             rapidez = func.dSpeed(float(corriente),dicmater[material],float(diametrus) )
+<<<<<<< Updated upstream
             rapi.configure(text= " " + str(rapidez) + " m/s" )
             tiempo = func.time(float(largo),float(rapidez)/60)
             tiemp.configure(text=" "+ str(tiempo) + " min")
             pr.drawLentgh(tortu2,str(largo),str(largoprefijo))
             potencia = func.power(float(voltaje), corriente)
             pot.configure(text= " " + str(potencia) + " W")
+=======
+            rapi.configure(text= " " + str(round(rapidez,2)) + " m/s" )
+            tiempo = func.time(float(largo),float(rapidez))
+            tiemp.configure(text=" "+ str(round(float(tiempo),2)/60) + " min")
+            potencia = func.power(float(voltaje), corriente)
+            pot.configure(text= " " + str(round(potencia,2)) + " W")
+            #pr.drawBattery(tortu2)
+            pr.cilindro(tortu2, largo, float(diametrus))
+>>>>>>> Stashed changes
             pr.movelectron(tortu3, tortu4, tortu5, tortu6, float(diametrus)/2, largo, tiempo%4, rapidez%11)
 
         
@@ -76,7 +92,7 @@ def calculardatos(largo, largoprefijo,diametro, voltaje, material):
 ###Array
 prefix = ["M", "k", "h", "da", "d", "--","c", "m","μ", "n", "p" ]
 dicprefix = { "M": 1*10**6, "k": 1*10**3, "h": 1*10**2, "da": 1*10**1, "--": 1 , "d": 1*10**-1, "c": 1*10**-2, "m": 1*10**-3, "μ": 1*10**-6, "n": 1*10**-9, "p": 1*10**-12 }
-awg = ["AWG 4", "AWG 6","AWG 8","AWG 10", "AWG 12","AWG 14", "AWG 16", "AWG 18", "AWG 20", "AWG 22"]
+awg = ['AWG 1', 'AWG 2', 'AWG 3', 'AWG 4', 'AWG 5', 'AWG 6', 'AWG 7', 'AWG 8', 'AWG 9', 'AWG 10', 'AWG 11', 'AWG 12', 'AWG 13', 'AWG 14', 'AWG 15', 'AWG 16', 'AWG 17', 'AWG 18', 'AWG 19', 'AWG 20', 'AWG 21', 'AWG 22', 'AWG 23', 'AWG 24', 'AWG 25', 'AWG 26', 'AWG 27', 'AWG 28', 'AWG 29', 'AWG 30', 'AWG 31', 'AWG 32', 'AWG 33', 'AWG 34', 'AWG 35', 'AWG 36', 'AWG 37', 'AWG 38', 'AWG 39', 'AWG 40']
 dicawg = {"AWG 4": 5.189, "AWG 6": 4.115,"AWG 8": 3.264,"AWG 10" : 2.588, "AWG 12" : 2.053,"AWG 14": 1.628, "AWG 16": 1.291, "AWG 18" : 1.024, "AWG 20" : 0.812, "AWG 22" : 0.643}
 mater = ["oro", "plata", "cobre", "aluminio", "grafito"]
 dicmater = {"oro":1.64*10**28, "plata" : 5.8*10**28, "cobre" :8.5*10**28, "aluminio": 1.87*10**28, "grafito": 6.2*10**28}
@@ -144,7 +160,7 @@ largoal = CTK.CTkLabel( entryframe,text="        Largo del alambre (metros)", fo
 largoal.grid(row=1, column = columndesp)
 entrylargo = CTK.CTkEntry(entryframe, placeholder_text="0.0 m")
 entrylargo.grid(row=2, column=columndesp)
-optionmenu_var = CTK.StringVar(value="n")
+optionmenu_var = CTK.StringVar(value="--")
 optionmenu = CTK.CTkOptionMenu(entryframe,values=prefix, variable=optionmenu_var, width=10 )
 optionmenu.grid(row=2, column=columndesp+1, sticky="w")
 
