@@ -10,6 +10,10 @@ import random as rnd
 CTK.set_appearance_mode("System")  # Modes: system (default), light, dark
 CTK.set_default_color_theme("blue")  # Themes: blue (default), dark-blue, green
 
+def update_density(event):
+    material_selected = maters.get()
+    density_particle = dicmater[material_selected]
+    density.configure(text=f"n = {density_particle} electrones/m^3")
 
 def calculardatos(largo, largoprefijo,diametro, voltaje, material, screen):
     if(int(largo) != 0  and int(voltaje) !=0):
@@ -85,7 +89,6 @@ def calculardatos(largo, largoprefijo,diametro, voltaje, material, screen):
             
             
     
-
 
 
 ###Array
@@ -173,8 +176,13 @@ awg.grid(row=5, column = columndesp)
 cond = CTK.CTkLabel( entryframe,text="Material del conductor", font=("Arial", 14))
 cond.grid(row=4, column = columndesp+3, sticky="s")
 materia = CTK.StringVar(value="oro")
-maters = CTK.CTkComboBox(entryframe, values=mater, state="readonly", variable=materia ) ##escribi la densidads
+maters = CTK.CTkComboBox(entryframe, values=mater, state="readonly", variable=materia, command=update_density ) ##escribi la densidads
 maters.grid(row=5, column = columndesp+3)
+
+
+#Muestra de densidad de partículas
+density = CTK.CTkLabel(frame, text= "n = " + str(dicmater[maters.get()]) + " electrones/m^3", font=("Arial", 14))
+density.grid(row=11, column=25, columnspan=25)
 
 ##Entradas voltaje aplicado
 voltage = CTK.CTkLabel( entryframe,text="Voltaje a aplicar (V)", font=("Arial", 14))
@@ -189,7 +197,6 @@ CTK.CTkLabel( entryframe,text="        ", font=("Arial", 14)).grid(row=7, column
 buton = CTK.CTkButton(entryframe, text="Calcular y dibujar", command=lambda: calculardatos(entrylargo.get(), optionmenu_var.get(), awgentry.get(),voltd.get() ,maters.get(), screen  ))
 buton.grid(row= 8, column=columndesp+1)
 butons = CTK.CTkButton(entryframe, text="")
-
 
 ##Parametros de Salida 
 
