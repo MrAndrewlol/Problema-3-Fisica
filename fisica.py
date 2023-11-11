@@ -8,11 +8,11 @@ import threading
 import random as rnd
 
 CTK.set_appearance_mode("System")  # Modes: system (default), light, dark
-CTK.set_default_color_theme("blue")  # Themes: blue (default), dark-blue, green
+CTK.set_default_color_theme("dark-blue")  # Themes: blue (default), dark-blue, green
 
 def update_density(event):
     material_selected = maters.get()
-    density_particle = dicmater[material_selected]
+    density_particle = round(dicmater[material_selected],2)
     density.configure(text=f"n = {density_particle} electrones/m^3")
 
 def calculardatos(largo, largoprefijo,diametro, voltaje, material, screen):
@@ -74,7 +74,7 @@ def calculardatos(largo, largoprefijo,diametro, voltaje, material, screen):
             rapidez = func.dSpeed(float(corriente),dicmater[material],float(diametrus) )
             rapi.configure(text= " " + str(round(rapidez,2)) + " m/s" )
             tiempo = func.time(float(largo),float(rapidez))
-            tiemp.configure(text=" "+ str(round(float(tiempo),2)/60) + " min")
+            tiemp.configure(text=" "+ str(round(int(tiempo),2)/60) + " min")
             potencia = func.power(float(voltaje), corriente)
             pot.configure(text= " " + str(round(potencia,2)) + " W")
             #pr.drawBattery(tortu2)
@@ -181,8 +181,8 @@ maters.grid(row=5, column = columndesp+3)
 
 
 #Muestra de densidad de partículas
-density = CTK.CTkLabel(frame, text= "n = " + str(dicmater[maters.get()]) + " electrones/m^3", font=("Arial", 14))
-density.grid(row=11, column=25, columnspan=25)
+density = CTK.CTkLabel(entryframe, text= "n = " + str(round(dicmater[maters.get()],2)) + " electrones/m^3", font=("Arial", 14))
+density.grid(row=6, column=columndesp+3)
 
 ##Entradas voltaje aplicado
 voltage = CTK.CTkLabel( entryframe,text="Voltaje a aplicar (V)", font=("Arial", 14))

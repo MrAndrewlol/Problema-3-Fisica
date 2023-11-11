@@ -168,6 +168,7 @@ def moveelectronrand(screen, coordx, coordy, coordfinal, speed):
             tortuga.goto(partidaini, rnd.randint(0,coordy+25))
         contadores = contadores +1
         partidaini = int(-coordx)
+    tortuga.hideturtle()
 
 
 def straight(screen, coordx, coordy, coordfinal, speed, random):
@@ -191,6 +192,8 @@ def straight(screen, coordx, coordy, coordfinal, speed, random):
         tortuga.goto(coordfinal-20, random)
         contador = contador + 1
         tortuga.speed(0)
+    tortuga.hideturtle()
+
 
 
 # app = tk.Tk()  # create CTk window like you do with the Tk window
