@@ -42,14 +42,14 @@ def calculardatos(largo, largoprefijo,diametro, voltaje, material, screen):
             elif(float(diametro)<0.812):
                 diametro = 0.643
             largo = float(largo)*dicprefix[largoprefijo]
-            resistencia = func.resistance(float(dicmateresis[material]), float(largo), float(diametrus))
+            resistencia = func.resistance(float(dicmateresis[material]), float(largo), float(diametro))
             resis.configure(text= " "+ str(round(resistencia,2)) +" Ω")
             corriente = func.current(float(voltaje), float(resistencia))
             corr.configure(text=" " + str(round(corriente,2)) + " A")
-            rapidez = func.dSpeed(float(corriente),dicmater[material],float(diametrus) )
+            rapidez = func.dSpeed(float(corriente),dicmater[material],float(diametro) )
             rapi.configure(text= " " + str(round(rapidez,2)) + " m/s" )
             tiempo = func.time(float(largo),float(rapidez))
-            tiemp.configure(text=" "+ str(round(tiempo),2) + " s")
+            tiemp.configure(text=" "+ str(round(int(tiempo),2)/60) + " min")
             potencia = func.power(float(voltaje), corriente)
             pot.configure(text= " " + str(round(potencia,2)) + " W")
             #pr.drawBattery(tortu2)
